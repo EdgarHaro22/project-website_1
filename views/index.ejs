@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpaceX Launches</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body>
+
+<div class="container">
+    <h1>SpaceX Launches</h1>
+    <a href="https://www.spacex.com/humanspaceflight/" class="btn btn-primary mb-3">Find out more on Space X </a> <!-- Button to go to crew members section -->
+    <ul class="list-unstyled">
+        <% launches.forEach(function(launch) { %>
+            <li class="media mb-3">
+                <% if (launch.links.patch.small) { %>
+                    <img src="<%= launch.links.patch.small %>" class="mr-3" alt="Launch Patch" style="width: 100px;">
+                <% } %>
+                <div class="media-body">
+                    <h5 class="mt-0 mb-1"><%= launch.name %></h5>
+                    Launch Date: <%= launch.date_utc %><br>
+                    <% if (launch.crew && launch.crew.length > 0) { %>
+                        <p>Crew Members:</p>
+                        <ul>
+                            <% launch.crew.forEach(function(crewMember) { %>
+                                <li><%= crewMember.name %></li>
+                            <% }); %>
+                        </ul>
+                    <% } %>
+                    <a href="<%= launch.links.article %>">Read Article</a> | 
+                    <a href="<%= launch.links.webcast %>">Watch Webcast</a>
+                    <% if (launch.details) { %>
+                        <p><%= launch.details %></p>
+                    <% } %>
+                </div>
+            </li>
+        <% }); %>
+    </ul>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+</body>
+</html>
